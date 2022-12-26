@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+import Test from './component/test'
+import ReduxToolkit from './component/ReduxToolkit'
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import userSlice from './store/userSlice';
 
-function App() {
+//store
+
+const store = configureStore({
+  reducer : {
+    //key: value
+    user: userSlice
+  }
+})
+
+function App () {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Routes>
+        <Route path="/redux" element={<Test/>}/>
+        <Route path="/reduxToolkit" element={<ReduxToolkit/>}/>
+      </Routes>
+    </Provider>
   );
-}
+} 
 
 export default App;
